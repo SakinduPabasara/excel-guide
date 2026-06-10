@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Zero to Hero - සිංහල මාර්ගෝපදේශය</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --green-dark: #0d3d2b;
+            --green-mid: #1a5c3e;
+            --green-light: #2e8b5a;
+            --green-accent: #3dba7a;
+            --green-glow: #5edd9c;
+            --gold: #f0c040;
+            --gold-light: #f7d96a;
+            --cream: #f9f7f2;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-mid: #3a3a3a;
+            --text-soft: #666;
+            --border: #d4e8db;
+            --card-bg: #ffffff;
+            --tag-bg: #e6f4ec;
+            --code-bg: #0d2b1e;
+            --shadow: 0 4px 24px rgba(13, 61, 43, 0.10);
+            --shadow-lg: 0 8px 40px rgba(13, 61, 43, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+            color: white;
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(61, 186, 122, 0.18) 0%, transparent 70%);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--green-dark);
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            padding: 5px 16px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            font-family: 'Noto Sans Sinhala', 'Inter', sans-serif;
+        }
+
+        .hero h1 span {
+            color: var(--green-glow);
+        }
+
+        .hero p {
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            opacity: 0.88;
+            max-width: 560px;
+            margin: 0 auto 28px;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        /* NAV TOC */
+        .toc {
+            background: var(--green-dark);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+
+        .toc::-webkit-scrollbar {
+            display: none;
+        }
+
+        .toc-inner {
+            display: inline-flex;
+            gap: 8px;
+            min-width: 100%;
+            justify-content: center;
+        }
+
+        .toc a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .toc a:hover {
+            background: var(--green-accent);
+            color: white;
+            border-color: var(--green-accent);
+        }
+
+        /* MAIN */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* SECTION */
+        .section {
+            padding: 48px 0 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--green-mid), var(--green-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(46, 139, 90, 0.3);
+        }
+
+        .section-title {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+            color: var(--green-dark);
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .section-sub {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            margin-top: 2px;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        /* CARD */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .card h3 {
+            color: var(--green-mid);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .card p,
+        .card li {
+            font-size: 0.92rem;
+            color: var(--text-mid);
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            line-height: 1.8;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card li {
+            margin-bottom: 6px;
+        }
+
+        /* FORMULA BOX */
+        .formula-box {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 12px 0;
+            border-left: 4px solid var(--green-accent);
+            overflow-x: auto;
+        }
+
+        .formula-label {
+            font-size: 0.7rem;
+            color: var(--green-accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .formula {
+            font-family: 'Fira Code', monospace;
+            color: #a8ffcb;
+            font-size: clamp(0.82rem, 2vw, 0.95rem);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .formula .comment {
+            color: #5d8a70;
+            font-style: italic;
+        }
+
+        /* EXAMPLE TABLE */
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 0.85rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .example-table th {
+            background: var(--green-mid);
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .example-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #e8f3ed;
+            font-family: 'Noto Sans Sinhala', 'Fira Code', sans-serif;
+        }
+
+        .example-table tr:nth-child(even) td {
+            background: #f3fbf6;
+        }
+
+        .example-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cell-ref {
+            font-family: 'Fira Code', monospace;
+            color: var(--green-light);
+            font-weight: 600;
+        }
+
+        /* TIP BOX */
+        .tip {
+            background: linear-gradient(135deg, #fffbea, #fff9db);
+            border: 1px solid #f0d060;
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 0.88rem;
+            color: #5a4500;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .tip strong {
+            color: #8a6200;
+        }
+
+        /* STEP CARDS */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .step-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-light), var(--green-accent));
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 5px;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        .step-content p {
+            font-size: 0.88rem;
+            color: var(--text-mid);
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        /* GRID */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 580px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* SHORTCUT GRID */
+        .shortcuts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .shortcut-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .shortcut-key {
+            background: var(--green-dark);
+            color: var(--green-glow);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .shortcut-desc {
+            font-size: 0.82rem;
+            color: var(--text-mid);
+            font-family: 'Noto Sans Sinhala', sans-serif;
+        }
+
+        /* TAG */
+        .tag {
+            display: inline-block;
+            background: var(--tag-bg);
+            color: var(--green-mid);
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 2px;
+            border: 1px solid #c0e0cc;
+        }
+
+        /* DIVIDER */
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            margin: 8px 0;
+        }
+
+        /* LEVEL BADGE */
+        .level {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .level-basic {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .level-mid {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .level-adv {
+            background: #fce4ec;
+            color: #c62828;
+        }
+
+        /* HIGHLIGHT ROW */
+        .highlight-row {
+            background: linear-gradient(135deg, #e8f8ef, #f0fbf4);
+            border: 1px solid #b8e5cc;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--green-dark);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 32px 20px;
+            margin-top: 48px;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        footer strong {
+            color: var(--gold);
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--green-light);
+            border-radius: 3px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .section {
+                padding: 32px 0 16px;
+            }
+
+            .card {
+                padding: 18px 16px;
+            }
+
+            .hero {
+                padding: 44px 16px 38px;
+            }
+
+            .toc-inner {
+                justify-content: flex-start;
+            }
+        }
+
+        /* SMOOTH SCROLL */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .anchor {
+            display: block;
+            height: 70px;
+            margin-top: -70px;
+            visibility: hidden;
+        }
+
+
+        /* ===== DARK MODE ===== */
+        body.dark {
+            --cream: #0f1a14;
+            --white: #1a2b22;
+            --text-dark: #e8f5ee;
+            --text-mid: #c0dcc9;
+            --text-soft: #7aaa90;
+            --border: #2a4a36;
+            --card-bg: #162a1e;
+            --tag-bg: #1a3526;
+            --code-bg: #071410;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark .tip {
+            background: linear-gradient(135deg, #2a2200, #1e1800);
+            border-color: #7a6010;
+            color: #d4aa40;
+        }
+
+        body.dark .tip strong {
+            color: #f0c040;
+        }
+
+        body.dark .highlight-row {
+            background: linear-gradient(135deg, #0f2a1a, #122214);
+            border-color: #2a5038;
+            color: #b0d8be;
+        }
+
+        body.dark .example-table tr:nth-child(even) td {
+            background: #0f2018;
+        }
+
+        body.dark .example-table td {
+            border-color: #1e3828;
+            color: #c0dcc9;
+        }
+
+        body.dark .shortcut-item {
+            background: #162a1e;
+            border-color: #2a4a36;
+        }
+
+        body.dark .step {
+            background: #162a1e;
+            border-color: #2a4a36;
+        }
+
+        body.dark .section-title {
+            color: #5edd9c;
+        }
+
+        body.dark footer {
+            background: #071410;
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            z-index: 999;
+            background: var(--green-dark);
+            color: white;
+            border: 2px solid var(--green-accent);
+            border-radius: 50px;
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .dark-toggle:hover {
+            background: var(--green-accent);
+            color: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        body.dark .dark-toggle {
+            background: #1a3526;
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        body.dark .dark-toggle:hover {
+            background: var(--gold);
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-badge">📊 Zero to Hero · සිංහල</div>
+        <h1>Microsoft Excel<br><span>සම්පූර්ණ මාර්ගෝපදේශය</span></h1>
+        <p>ගිණුම්කාරිණියකට අවශ්‍ය Excel දැනුම — මූලික සිට ඉදිරිදැක්ම දක්වා, සිංහලෙන් සරලව</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-num">10+</div>
+                <div class="stat-label">පාඩම් අදියරයන්</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">සූත්‍ර & උදාහරණ</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">සිංහල මාධ්‍ය</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOC NAV -->
+    <nav class="toc">
+        <div class="toc-inner">
+            <a href="#basics">📱 මූලිකය</a>
+            <a href="#navigation">🧭 Navigate</a>
+            <a href="#data-entry">✍️ Data Entry</a>
+            <a href="#formulas">🔢 සූත්‍ර</a>
+            <a href="#functions">⚡ Functions</a>
+            <a href="#accounting">💰 ගිණුම්</a>
+            <a href="#charts">📊 Charts</a>
+            <a href="#formatting">🎨 Formatting</a>
+            <a href="#sort-filter">🔍 Sort & Filter</a>
+            <a href="#shortcuts">⌨️ Shortcuts</a>
+            <a href="#tips">💡 Pro Tips</a>
+        </div>
+    </nav>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-toggle" onclick="toggleDark()" id="darkBtn">🌙 Dark Mode</button>
+
+    <div class="container">
+
+        <!-- ===== SECTION 1: BASICS ===== -->
+        <span id="basics" class="anchor"></span>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📱</div>
+                <div>
+                    <div class="section-title">1. Excel යනු කුමක්ද? — මූලික හැඳින්වීම</div>
+                    <div class="section-sub">Excel Screen එකේ කොටස් හඳුනාගනිමු</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🖥️ Excel Window එකේ ප්‍රධාන කොටස්</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Ribbon (ரிப்பன்)</h4>
+                            <p>ඉහළින් ඇති toolbar එක. Home, Insert, Formulas, Data ආදී tabs ඇත. සියලු features මෙහිදී.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Name Box</h4>
+                            <p>ඉහළ වමේ කුඩා box එක — ඔබ select කළ cell එකේ address පෙන්වයි. (උදා: A1, B5, C10)</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>Formula Bar</h4>
+                            <p>Name Box ළඟ ඇති දිග box එක. Select කළ cell එකේ ඇති සූත්‍රය හෝ data පෙන්වයි.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <h4>Columns & Rows</h4>
+                            <p>Column = සිරස් (A, B, C...). Row = තිරස් (1, 2, 3...). Cell Address = Column + Row (A1,
+                                B3, D7)</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <h4>Sheet Tabs</h4>
+                            <p>පහළින් ඇති Sheet1, Sheet2... tabs. එකිනෙකා file එකක් තුළ pages ලෙස සිතන්න.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>💡 ප්‍රධාන කරුණ:</strong> Excel හි සෑම data piece එකක්ම <strong>Cell</strong> එකක ගබඩා වේ. Cell
+                = Row + Column හමු වන ස්ථානය. A1 = A column + Row 1.
+            </div>
+        </div>
+
+        <!-- ===== SECTION 2: NAVIGATION ===== -->
+        <span id="navigation" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🧭</div>
+                <div>
+                    <div class="section-title">2. Navigate කිරීම</div>
+                    <div class="section-sub">Spreadsheet එකේ ඉක්මනින් ගමන් කිරීම</div>
+                </div>
+            </div>
+
+            <div class="shortcuts">
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Arrow Keys</span>
+                    <span class="shortcut-desc">Cell to Cell ගෙන යන්න</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Tab</span>
+                    <span class="shortcut-desc">දකුණට move වෙන්න</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Enter</span>
+                    <span class="shortcut-desc">පහළට move වෙන්න</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Ctrl + Home</span>
+                    <span class="shortcut-desc">A1 cell ට යයි</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Ctrl + End</span>
+                    <span class="shortcut-desc">Data ඇති last cell ට</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Ctrl + →</span>
+                    <span class="shortcut-desc">Data ඇති last column ට</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">F5</span>
+                    <span class="shortcut-desc">නිශ්චිත cell ට jump</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-key">Ctrl + G</span>
+                    <span class="shortcut-desc">Go To dialog</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 3: DATA ENTRY ===== -->
+        <span id="data-entry" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">✍️</div>
+                <div>
+                    <div class="section-title">3. Data Entry — Data ඇතුල් කිරීම</div>
+                    <div class="section-sub">Numbers, Text, Dates නිවැරදිව ඇතුළු කිරීම</div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🔢 Numbers (ඉලක්කම්)</h3>
+                    <p>Cell click කර number type කරන්න. Default ලෙස දකුණට align වේ.</p>
+                    <div class="formula-box">
+                        <div class="formula-label">Example</div>
+                        <div class="formula">A1 ← 5000
+                            A2 ← 12500.50
+                            A3 ← -800</div>
+                    </div>
+                    <div class="tip" style="margin-top:10px;">❌ Number සමග spaces හෝ letters දාන්නේ නැහැ — Excel text
+                        ලෙස හඳුනාවි.</div>
+                </div>
+                <div class="card">
+                    <h3>📝 Text (වචන)</h3>
+                    <p>Employee name, product name ආදිය. Default ලෙස වමට align වේ.</p>
+                    <div class="formula-box">
+                        <div class="formula-label">Example</div>
+                        <div class="formula">A1 ← Nisha
+                            A2 ← Export Items
+                            A3 ← January</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📅 Dates (දිනයන්)</h3>
+                <span class="level level-basic">Basic</span>
+                <p>Excel Date format: <strong>MM/DD/YYYY</strong> හෝ <strong>DD-MM-YYYY</strong></p>
+                <div class="formula-box">
+                    <div class="formula-label">Date Entry</div>
+                    <div class="formula">A1 ← 01/06/2025 <span class="comment">← June 1, 2025</span>
+                        A2 ← 15-06-2025 <span class="comment">← June 15, 2025</span></div>
+                </div>
+                <div class="tip"><strong>💡 Tip:</strong> Ctrl + ; (semicolon) 누르면today's date auto insert වේ!</div>
+            </div>
+
+            <div class="card">
+                <h3>⚡ AutoFill — ස්වයංක්‍රීය පිරවීම</h3>
+                <p>January type කර, cell corner ඇති කුඩා <strong>■ (fill handle)</strong> drag කරන්න → February,
+                    March... auto fill!</p>
+                <div class="formula-box">
+                    <div class="formula-label">AutoFill Examples</div>
+                    <div class="formula">1, 2, 3... → ඉලක්කම් series
+                        Mon, Tue... → දිනවල names
+                        Jan, Feb... → මාස names
+                        2025, 2026... → අවුරුදු</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 4: FORMULAS ===== -->
+        <span id="formulas" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🔢</div>
+                <div>
+                    <div class="section-title">4. සූත්‍ර (Formulas) — ගණනය කිරීම</div>
+                    <div class="section-sub">Excel ගණිත — = ලකුණෙන් ආරම්භ</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📌 Rules — නීතිය</h3>
+                <div class="highlight-row">
+                    ✅ සෑම formula එකක්ම <strong>= (Equal sign)</strong> ලකුණෙන් ආරම්භ කළ යුතුය!
+                </div>
+                <div class="formula-box">
+                    <div class="formula-label">Basic Operators</div>
+                    <div class="formula">= A1 + B1 <span class="comment">← Add (එකතු)</span>
+                        = A1 - B1 <span class="comment">← Subtract (අඩු)</span>
+                        = A1 * B1 <span class="comment">← Multiply (ගුණ)</span>
+                        = A1 / B1 <span class="comment">← Divide (බෙදීම)</span>
+                        = A1 ^ 2 <span class="comment">← Power (A1 හි වර්ගය)</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💼 Clothing Export Company — ප්‍රායෝගික උදාහරණය</h3>
+                <span class="level level-basic">ප්‍රායෝගික</span>
+                <p style="margin-bottom:12px;">T-Shirt export order එකක ගණනය:</p>
+                <table class="example-table">
+                    <tr>
+                        <th>Cell</th>
+                        <th>Data / Formula</th>
+                        <th>විස්තර</th>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">A1</td>
+                        <td>Product</td>
+                        <td>Header</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">B1</td>
+                        <td>Qty (Units)</td>
+                        <td>Header</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">C1</td>
+                        <td>Unit Price (Rs.)</td>
+                        <td>Header</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">D1</td>
+                        <td>Total Value</td>
+                        <td>Header</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">A2</td>
+                        <td>T-Shirt</td>
+                        <td>Item name</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">B2</td>
+                        <td>500</td>
+                        <td>ප්‍රමාණය</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">C2</td>
+                        <td>850</td>
+                        <td>Unit price</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">D2</td>
+                        <td><strong>=B2*C2</strong></td>
+                        <td>500 × 850 = 425,000</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>🔗 Cell Reference — Cell ලිපිනය භාවිතය</h3>
+                <div class="grid-2">
+                    <div>
+                        <p><strong>Relative Reference</strong></p>
+                        <div class="formula-box">
+                            <div class="formula">=A1+B1
+                                <span class="comment">← Copy කළ විට
+                                    row/column auto change</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p><strong>Absolute Reference ($)</strong></p>
+                        <div class="formula-box">
+                            <div class="formula">=$A$1+B1
+                                <span class="comment">← Copy කළ විට A1
+                                    change නොවේ (Fixed!)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 Tip:</strong> F4 key press කළ විට $ signs auto add/remove වේ!</div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 5: FUNCTIONS ===== -->
+        <span id="functions" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <div>
+                    <div class="section-title">5. ප්‍රධාන Functions</div>
+                    <div class="section-sub">ගිණුම්කාරිණියකට වැදගත්ම Excel functions</div>
+                </div>
+            </div>
+
+            <!-- SUM -->
+            <div class="card">
+                <h3>➕ SUM — එකතු කිරීම</h3>
+                <span class="level level-basic">Most Used</span>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=SUM(A1:A10) <span class="comment">← A1 සිට A10 දක්වා</span>
+                        =SUM(A1,B1,C1) <span class="comment">← Selected cells</span>
+                        =SUM(A:A) <span class="comment">← A column සියල්ල</span></div>
+                </div>
+                <table class="example-table" style="margin-top:12px;">
+                    <tr>
+                        <th>A</th>
+                        <th>B (Sales - Rs.)</th>
+                    </tr>
+                    <tr>
+                        <td>January</td>
+                        <td>125,000</td>
+                    </tr>
+                    <tr>
+                        <td>February</td>
+                        <td>98,500</td>
+                    </tr>
+                    <tr>
+                        <td>March</td>
+                        <td>145,200</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>=SUM(B2:B4) → 368,700</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- AVERAGE -->
+            <div class="card">
+                <h3>📊 AVERAGE — සාමාන්‍ය</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=AVERAGE(B2:B4)
+                        <span class="comment">← 368,700 ÷ 3 = 122,900</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COUNT -->
+            <div class="card">
+                <h3>🔢 COUNT / COUNTA — ගණන් කිරීම</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=COUNT(A1:A20) <span class="comment">← Numbers ගණන</span>
+                        =COUNTA(A1:A20) <span class="comment">← සියලු filled cells</span>
+                        =COUNTIF(A1:A20,"T-Shirt")
+                        <span class="comment">← "T-Shirt" කීවාරක් ද?</span>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 Export Example:</strong> =COUNTIF(C2:C50,"Shipped") — "Shipped" orders ගණන
+                    ගනී.</div>
+            </div>
+
+            <!-- MAX MIN -->
+            <div class="card">
+                <h3>📈 MAX / MIN — ඉහළම / පහළම</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=MAX(B2:B12) <span class="comment">← හොඳම sales month</span>
+                        =MIN(B2:B12) <span class="comment">← අඩුම sales month</span></div>
+                </div>
+            </div>
+
+            <!-- IF -->
+            <div class="card">
+                <h3>🤔 IF — Condition (නිබන්ධනය)</h3>
+                <span class="level level-mid">Important</span>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=IF(condition, value_if_true, value_if_false)</div>
+                </div>
+                <p style="margin: 10px 0 6px;">Clothing export ප්‍රායෝගික:</p>
+                <div class="formula-box">
+                    <div class="formula-label">Export Company Examples</div>
+                    <div class="formula">=IF(D2>=100000,"Target Achieved","Below Target")
+                        <span class="comment">← Sales 100,000+ නම් "Target Achieved"</span>
+
+                        =IF(B2>500,"Bulk Order","Normal Order")
+                        <span class="comment">← Qty 500+ නම් "Bulk Order"</span>
+
+                        =IF(E2="Paid","✓ Clear","⚠ Pending")
+                        <span class="comment">← Payment status check</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VLOOKUP -->
+            <div class="card">
+                <h3>🔍 VLOOKUP — Data සොයා ගැනීම</h3>
+                <span class="level level-adv">Advanced</span>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=VLOOKUP(lookup_value, table, col_index, 0)</div>
+                </div>
+                <p style="margin: 10px 0 8px;">Product code දී price සොයා ගැනීමට:</p>
+                <table class="example-table">
+                    <tr>
+                        <th>A (Code)</th>
+                        <th>B (Product)</th>
+                        <th>C (Price)</th>
+                    </tr>
+                    <tr>
+                        <td>P001</td>
+                        <td>T-Shirt</td>
+                        <td>850</td>
+                    </tr>
+                    <tr>
+                        <td>P002</td>
+                        <td>Jeans</td>
+                        <td>2,200</td>
+                    </tr>
+                    <tr>
+                        <td>P003</td>
+                        <td>Jacket</td>
+                        <td>4,500</td>
+                    </tr>
+                </table>
+                <div class="formula-box" style="margin-top:10px;">
+                    <div class="formula-label">Usage</div>
+                    <div class="formula">=VLOOKUP("P002", A2:C4, 3, 0)
+                        <span class="comment">← P002 හි price → 2,200</span>
+
+                        =VLOOKUP(G2, A2:C4, 2, 0)
+                        <span class="comment">← G2 හි code ට product name</span>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 col_index:</strong> Table එකේ 1st column = 1, 2nd = 2, 3rd = 3. අවසාන 0 =
+                    Exact Match</div>
+            </div>
+
+            <!-- SUMIF -->
+            <div class="card">
+                <h3>💰 SUMIF — Condition එකකට Sum</h3>
+                <span class="level level-mid">Accounting Key</span>
+                <div class="formula-box">
+                    <div class="formula-label">Syntax</div>
+                    <div class="formula">=SUMIF(range, criteria, sum_range)</div>
+                </div>
+                <div class="formula-box">
+                    <div class="formula-label">Export Examples</div>
+                    <div class="formula">=SUMIF(C2:C50, "Jacket", D2:D50)
+                        <span class="comment">← Jacket sales එකතුව</span>
+
+                        =SUMIF(B2:B50, "January", E2:E50)
+                        <span class="comment">← January month sales</span>
+
+                        =SUMIF(F2:F50, "Pending", G2:G50)
+                        <span class="comment">← Pending payments total</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEXT Functions -->
+            <div class="card">
+                <h3>🔤 Text Functions</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Useful Text Functions</div>
+                    <div class="formula">=UPPER("nisha") <span class="comment">→ NISHA</span>
+                        =LOWER("NISHA") <span class="comment">→ nisha</span>
+                        =PROPER("nisha de silva") <span class="comment">→ Nisha De Silva</span>
+                        =LEN("T-Shirt") <span class="comment">→ 7 (character count)</span>
+                        =TRIM(" Nisha ") <span class="comment">→ "Nisha" (spaces ඉවත්)</span>
+                        =CONCATENATE(A1," ",B1) <span class="comment">→ words join</span>
+                        =A1&" "&B1 <span class="comment">→ Same as above</span>
+                        =LEFT("PO-12345",2) <span class="comment">→ "PO"</span>
+                        =MID("PO-12345",4,5)<span class="comment">→ "12345"</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 6: ACCOUNTING ===== -->
+        <span id="accounting" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">💰</div>
+                <div>
+                    <div class="section-title">6. ගිණුම් කටයුතු — Accounting Tasks</div>
+                    <div class="section-sub">Cloth Export Company ගිණුම් ප්‍රායෝගිකව</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📋 Sales Register (විකුණුම් ලේඛනය) Layout</h3>
+                <table class="example-table">
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                        <th>E</th>
+                        <th>F</th>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>Invoice No</td>
+                        <td>Product</td>
+                        <td>Qty</td>
+                        <td>Unit Price</td>
+                        <td>Total</td>
+                    </tr>
+                    <tr>
+                        <td>01/06/25</td>
+                        <td>INV-001</td>
+                        <td>T-Shirt</td>
+                        <td>200</td>
+                        <td>850</td>
+                        <td>=D2*E2</td>
+                    </tr>
+                    <tr>
+                        <td>02/06/25</td>
+                        <td>INV-002</td>
+                        <td>Jeans</td>
+                        <td>100</td>
+                        <td>2200</td>
+                        <td>=D3*E3</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><strong>Total Sales</strong></td>
+                        <td><strong>=SUM(F2:F100)</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>📊 Percentage (ප්‍රතිශතය) — % ගනිමු</h3>
+                <span class="level level-basic">ප්‍රතිශතය</span>
+                <div class="formula-box">
+                    <div class="formula-label">Percentage Formulas</div>
+                    <div class="formula"><span class="comment">= Part / Total * 100</span>
+
+                        =B2/B13*100
+                        <span class="comment">← Product share %</span>
+
+                        =IF(D2>0, (D2-C2)/C2*100, 0)
+                        <span class="comment">← Growth % (this vs last month)</span>
+
+                        =(D2/E2)*100
+                        <span class="comment">← Target achievement %</span>
+
+                        =B2*(1+10/100)
+                        <span class="comment">← 10% increase (price hike)</span>
+
+                        =B2*(1-15/100)
+                        <span class="comment">← 15% discount</span>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 Tip:</strong> % symbol for formatting: Cell select → Ctrl+Shift+% → auto %
+                    format!</div>
+            </div>
+
+            <div class="card">
+                <h3>📉 Expense & Profit ගනිමු</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Profit Calculation</div>
+                    <div class="formula"><span class="comment">Revenue (ආදායම) - Expenses (වියදම) = Profit</span>
+
+                        =F2-G2 <span class="comment">← Profit per order</span>
+                        =SUM(F2:F50) <span class="comment">← Total Revenue</span>
+                        =SUM(G2:G50) <span class="comment">← Total Expenses</span>
+                        =H2-H3 <span class="comment">← Net Profit</span>
+                        =H4/H2*100 <span class="comment">← Profit Margin %</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🏦 Salary Sheet (ගෙවීම් ලේඛනය)</h3>
+                <table class="example-table">
+                    <tr>
+                        <th>A (Employee)</th>
+                        <th>B (Basic)</th>
+                        <th>C (OT)</th>
+                        <th>D (Deductions)</th>
+                        <th>E (Net Pay)</th>
+                    </tr>
+                    <tr>
+                        <td>Nisha</td>
+                        <td>45,000</td>
+                        <td>5,000</td>
+                        <td>3,500</td>
+                        <td>=B2+C2-D2</td>
+                    </tr>
+                    <tr>
+                        <td>Priya</td>
+                        <td>38,000</td>
+                        <td>2,500</td>
+                        <td>3,000</td>
+                        <td>=B3+C3-D3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td>=SUM(B2:B10)</td>
+                        <td>=SUM(C2:C10)</td>
+                        <td>=SUM(D2:D10)</td>
+                        <td>=SUM(E2:E10)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 7: CHARTS ===== -->
+        <span id="charts" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📊</div>
+                <div>
+                    <div class="section-title">7. Charts — ප්‍රස්ථාර</div>
+                    <div class="section-sub">Data graphs ලෙස දෘශ්‍යමාන කිරීම</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 Chart හදන විදිහ — Step by Step</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Data Select කරන්න</h4>
+                            <p>Chart කළ යුතු data range select කරන්න (headers සමගින්). Shift+Click හෝ drag.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Insert → Chart</h4>
+                            <p>Ribbon → <strong>Insert</strong> tab → <strong>Charts</strong> group → Chart type select
+                                කරන්න.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>Chart Type තෝරන්න</h4>
+                            <p>Column, Bar, Line, Pie ආදිය. Export data සඳහා Column Chart / Line Chart suitable.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <h4>Chart Title Add කරන්න</h4>
+                            <p>Chart click → Design tab → "Monthly Sales Report 2025" ආකාරයෙන් title add.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📊 Column Chart</h3>
+                    <p>Monthly sales compare කරන්න. Bar chart = Same but horizontal.</p>
+                    <div class="tip" style="margin-top:8px;">Best for: Sales comparison, Product performance</div>
+                </div>
+                <div class="card">
+                    <h3>🥧 Pie Chart</h3>
+                    <p>Total sales හි product share % පෙන්වන්න. Parts of a whole.</p>
+                    <div class="tip" style="margin-top:8px;">Best for: Market share, Expense breakdown</div>
+                </div>
+                <div class="card">
+                    <h3>📈 Line Chart</h3>
+                    <p>Trend over time. Month by month sales trend.</p>
+                    <div class="tip" style="margin-top:8px;">Best for: Growth trends, Over-time analysis</div>
+                </div>
+                <div class="card">
+                    <h3>🔲 Pivot Table</h3>
+                    <p>Data summarize කිරීමට. Insert → PivotTable → fields drag.</p>
+                    <div class="tip" style="margin-top:8px;">Best for: Big data summary reports</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 8: FORMATTING ===== -->
+        <span id="formatting" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🎨</div>
+                <div>
+                    <div class="section-title">8. Formatting — ලස්සන Layout</div>
+                    <div class="section-sub">Professional ලෙස present කිරීම</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💱 Number Formatting</h3>
+                <div class="formula-box">
+                    <div class="formula-label">How To</div>
+                    <div class="formula">Select Cells → Ctrl+1 → Format Cells → Number tab
+
+                        Currency: Rs. 45,000.00
+                        Percentage: 23.5%
+                        Date: 01 June 2025
+                        Comma: 1,234,567</div>
+                </div>
+                <div class="shortcuts" style="margin-top:12px;">
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Ctrl+Shift+$</span>
+                        <span class="shortcut-desc">Currency format</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Ctrl+Shift+%</span>
+                        <span class="shortcut-desc">Percentage format</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <span class="shortcut-key">Ctrl+1</span>
+                        <span class="shortcut-desc">Format Cells dialog</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Conditional Formatting</h3>
+                <span class="level level-mid">Smart Coloring</span>
+                <p style="margin-bottom:10px;">Values අනුව cells automatically color change කරවීම:</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Data range select කරන්න</h4>
+                            <p>Color change කිරීමට අවශ්‍ය cells select කරන්න.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Home → Conditional Formatting</h4>
+                            <p>Highlight Cells Rules → Greater Than → 100000 → Green Fill → OK</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 Export Example:</strong> Pending payments → Red, Paid → Green. Due dates
+                    passed → Orange highlight.</div>
+            </div>
+
+            <div class="card">
+                <h3>📏 Merge & Align</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Common Formatting</div>
+                    <div class="formula">Merge cells: Select A1:E1 → Home → Merge & Center
+                        <span class="comment">← Report title center කිරීමට</span>
+                        Bold: Ctrl + B
+                        Italic: Ctrl + I
+                        Underline: Ctrl + U
+                        Border: Home → Borders dropdown
+                        Wrap Text: Home → Wrap Text (long text)
+                        AutoFit: Column header double-click
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 9: SORT & FILTER ===== -->
+        <span id="sort-filter" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🔍</div>
+                <div>
+                    <div class="section-title">9. Sort & Filter — ක්‍රමගත කිරීම</div>
+                    <div class="section-sub">Data organize කිරීම හා නිශ්චිත data සොයා ගැනීම</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⬆️ Sort (ക्रमबद्ध) කිරීම</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Data range select</h4>
+                            <p>Sort කිරීමට අවශ්‍ය column හෝ entire table select කරන්න.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Data → Sort</h4>
+                            <p>Column choose කර A→Z (ascending) හෝ Z→A (descending) select.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 Example:</strong> Sales column Sort Z→A = Highest sales first. Date Sort A→Z
+                    = Oldest to Newest.</div>
+            </div>
+
+            <div class="card">
+                <h3>🔎 Filter (Autofilter) — ෆිල්ටර්</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Header row click</h4>
+                            <p>Data ඇති table header row click කරන්න.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Data → Filter (Ctrl+Shift+L)</h4>
+                            <p>Headers වල dropdown arrows appear වේ. Click → filter options.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>Filter apply කරන්න</h4>
+                            <p>Specific items check/uncheck. Number filters: Greater Than, Between ආදිය.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tip"><strong>💡 Export Example:</strong> Product column filter → "T-Shirt" only → T-Shirt
+                    orders மட்டும் show. Status filter → "Pending" → pending orders.</div>
+            </div>
+
+            <div class="card">
+                <h3>🔎 Find & Replace</h3>
+                <div class="formula-box">
+                    <div class="formula-label">Shortcuts</div>
+                    <div class="formula">Ctrl + F <span class="comment">← Find (සොයා ගැනීම)</span>
+                        Ctrl + H <span class="comment">← Find & Replace
+                            "T-shirt" → "T-Shirt" mass change</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 10: SHORTCUTS ===== -->
+        <span id="shortcuts" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⌨️</div>
+                <div>
+                    <div class="section-title">10. Essential Keyboard Shortcuts</div>
+                    <div class="section-sub">ඉක්මනින් වැඩ කිරීම — Time Save Shortcuts</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📁 File & General</h3>
+                <div class="shortcuts">
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+S</span><span class="shortcut-desc">Save
+                            (රකිනවා)</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+Z</span><span class="shortcut-desc">Undo
+                            (ආපස්සට)</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+Y</span><span class="shortcut-desc">Redo
+                            (යළිත්)</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+C</span><span
+                            class="shortcut-desc">Copy</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+V</span><span
+                            class="shortcut-desc">Paste</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+X</span><span
+                            class="shortcut-desc">Cut</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+P</span><span
+                            class="shortcut-desc">Print</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+N</span><span class="shortcut-desc">New
+                            Workbook</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Data & Formulas</h3>
+                <div class="shortcuts">
+                    <div class="shortcut-item"><span class="shortcut-key">Alt+Enter</span><span
+                            class="shortcut-desc">New line in cell</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+Enter</span><span
+                            class="shortcut-desc">Selected cells fill</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+D</span><span class="shortcut-desc">Fill
+                            Down (පහළට)</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+R</span><span class="shortcut-desc">Fill
+                            Right (දකුණට)</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Alt+=</span><span class="shortcut-desc">Auto
+                            SUM formula</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">F2</span><span class="shortcut-desc">Edit
+                            cell</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">F4</span><span class="shortcut-desc">$ toggle
+                            (Absolute)</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+`</span><span class="shortcut-desc">Show
+                            all formulas</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Formatting Shortcuts</h3>
+                <div class="shortcuts">
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+B</span><span
+                            class="shortcut-desc">Bold</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+I</span><span
+                            class="shortcut-desc">Italic</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+U</span><span
+                            class="shortcut-desc">Underline</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+1</span><span
+                            class="shortcut-desc">Format cells dialog</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+Shift+$</span><span
+                            class="shortcut-desc">Currency format</span></div>
+                    <div class="shortcut-item"><span class="shortcut-key">Ctrl+Shift+%</span><span
+                            class="shortcut-desc">Percentage format</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 11: PRO TIPS ===== -->
+        <span id="tips" class="anchor"></span>
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">💡</div>
+                <div>
+                    <div class="section-title">11. Pro Tips & Best Practices</div>
+                    <div class="section-sub">ගිණුම්කාරිණියකගේ Excel Workflow</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>✅ File Save Best Practices</h3>
+                <ul>
+                    <li>සෑම විටම <strong>Ctrl+S</strong> → File save කරන්න</li>
+                    <li>File name: <strong>SalesReport_June2025.xlsx</strong> ආකාරයෙන් date include කරන්න</li>
+                    <li>Excel file format: <strong>.xlsx</strong> (default, best)</li>
+                    <li>Cloud backup: OneDrive හෝ Google Drive sync recommended</li>
+                    <li>Weekly backup copy separate folder එකේ save කරන්න</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📐 Data Entry Rules — Error ගෙදර නොයවන්න</h3>
+                <ul>
+                    <li>Numbers සමග currency symbols (Rs., $) type නොකරන්න — formatting use කරන්න</li>
+                    <li>Dates consistent format එකෙන් ඇතුළු කරන්න (MM/DD/YYYY හෝ DD-MM-YYYY)</li>
+                    <li>Empty rows/columns table middle හි නොතබන්න</li>
+                    <li>Column headers Row 1 හිම තබන්න (A1 සිට)</li>
+                    <li>Spaces extra ලෙස නොදමන්න — =TRIM() use කරන්න</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🏗️ Export Company Sheet Structure</h3>
+                <p style="margin-bottom:10px;">Recommended sheets structure:</p>
+                <div class="highlight-row">
+                    📄 <strong>Sheet 1:</strong> Sales Register (Invoice wise)<br>
+                    📄 <strong>Sheet 2:</strong> Products & Price List<br>
+                    📄 <strong>Sheet 3:</strong> Customer List<br>
+                    📄 <strong>Sheet 4:</strong> Monthly Summary<br>
+                    📄 <strong>Sheet 5:</strong> Expenses<br>
+                    📄 <strong>Sheet 6:</strong> Salary Sheet
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ Common Errors & Fixes</h3>
+                <table class="example-table">
+                    <tr>
+                        <th>Error</th>
+                        <th>හේතුව</th>
+                        <th>Fix</th>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">#DIV/0!</td>
+                        <td>Zero ලෙස divide</td>
+                        <td>=IF(B2=0,0,A2/B2)</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">#VALUE!</td>
+                        <td>Text + Number</td>
+                        <td>Data type check</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">#REF!</td>
+                        <td>Deleted cell refer</td>
+                        <td>Formula re-check</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">#N/A</td>
+                        <td>VLOOKUP miss</td>
+                        <td>IFERROR wrap</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">########</td>
+                        <td>Column too narrow</td>
+                        <td>Column width widen</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-ref">#NAME?</td>
+                        <td>Typo in function</td>
+                        <td>SUM not SUML</td>
+                    </tr>
+                </table>
+                <div class="formula-box" style="margin-top:12px;">
+                    <div class="formula-label">IFERROR — Errors Hide කිරීම</div>
+                    <div class="formula">=IFERROR(VLOOKUP(A2,B2:C10,2,0), "Not Found")
+                        <span class="comment">← Error ආවොත් "Not Found" show කරයි</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Practice Exercise — Cloth Export Sheet</h3>
+                <p style="margin-bottom:12px;">මේ exercise try කරන්න:</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Header row හදන්න</h4>
+                            <p>A1:F1 = Date | Invoice | Product | Qty | Unit Price | Total</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Data 10 rows ඇතුළු කරන්න</h4>
+                            <p>Products: T-Shirt, Jeans, Jacket. Mix dates, quantities.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>F column — Total formula</h4>
+                            <p>=D2*E2 ලියා F11 දක්වා fill down (Ctrl+D)</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <h4>Total, Average ගනිමු</h4>
+                            <p>=SUM(F2:F11), =AVERAGE(F2:F11), =MAX(F2:F11)</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <h4>SUMIF — Product wise total</h4>
+                            <p>=SUMIF(C2:C11,"T-Shirt",F2:F11) → T-Shirt total</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">6</div>
+                        <div class="step-content">
+                            <h4>Chart add කරන්න</h4>
+                            <p>Product vs Total select → Insert → Column Chart</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- QUICK REFERENCE -->
+        <div class="divider"></div>
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📌</div>
+                <div>
+                    <div class="section-title">Quick Reference — ඉක්මන් Reference Card</div>
+                    <div class="section-sub">Export Company සඳහා Most Used Formulas</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="formula-box">
+                    <div class="formula-label">Accounting — Most Used Formulas Cheatsheet</div>
+                    <div class="formula"><span class="comment">==== BASIC ====</span>
+                        =SUM(B2:B50) <span class="comment">Total Sales</span>
+                        =AVERAGE(B2:B12) <span class="comment">Average Monthly Sales</span>
+                        =MAX(B2:B12) <span class="comment">Best Month</span>
+                        =MIN(B2:B12) <span class="comment">Worst Month</span>
+                        =COUNT(A2:A50) <span class="comment">Order Count</span>
+
+                        <span class="comment">==== PERCENTAGE ====</span>
+                        =B2/SUM(B$2:B$12)*100 <span class="comment">Product share %</span>
+                        =(B2-A2)/A2*100 <span class="comment">Growth %</span>
+                        =B2*1.1 <span class="comment">10% price increase</span>
+                        =B2*0.85 <span class="comment">15% discount</span>
+
+                        <span class="comment">==== CONDITIONAL ====</span>
+                        =IF(E2="Paid","✓","⚠") <span class="comment">Payment status</span>
+                        =SUMIF(C:C,"T-Shirt",F:F) <span class="comment">T-Shirt sales total</span>
+                        =COUNTIF(E:E,"Pending") <span class="comment">Pending count</span>
+
+                        <span class="comment">==== LOOKUP ====</span>
+                        =VLOOKUP(A2,Products!A:C,2,0) <span class="comment">Product price lookup</span>
+                        =IFERROR(formula,"N/A") <span class="comment">Error handling</span>
+
+                        <span class="comment">==== TEXT ====</span>
+                        =UPPER(A2) <span class="comment">UPPERCASE</span>
+                        =PROPER(A2) <span class="comment">Title Case</span>
+                        =A2&" "&B2 <span class="comment">Join cells</span>
+                        =TRIM(A2) <span class="comment">Remove extra spaces</span>
+                        =LEN(A2) <span class="comment">Character count</span>
+
+                        <span class="comment">==== DATE ====</span>
+                        =TODAY() <span class="comment">Today's date</span>
+                        =NOW() <span class="comment">Current date & time</span>
+                        =MONTH(A2) <span class="comment">Month number</span>
+                        =YEAR(A2) <span class="comment">Year number</span>
+                        =TEXT(A2,"MMMM YYYY") <span class="comment">"June 2025"</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end container -->
+
+    <footer>
+        <div style="font-size:1.8rem; margin-bottom:12px;">🎉</div>
+        <p>මෙම Guide එක ඔබේ girlfriend ලා සඳහා <strong>ආදරයෙන්</strong> සකස් කරන ලදී.</p>
+        <p style="margin-top:8px; opacity:0.6;">Excel හොඳින් ඉගෙන ගෙන නව රැකියාවේ ජය ලබනු ඇත! 💪</p>
+        <p style="margin-top:16px; font-size:0.78rem; opacity:0.45;">Microsoft Excel Zero to Hero · සිංහල මාර්ගෝපදේශය ·
+            Cloth Export Accounting</p>
+    </footer>
+
+    <script>
+        function toggleDark() {
+            const body = document.body;
+            const btn = document.getElementById('darkBtn');
+            body.classList.toggle('dark');
+            if (body.classList.contains('dark')) {
+                btn.innerHTML = '☀️ Light Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                btn.innerHTML = '🌙 Dark Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        // Page load වෙද්දී saved preference load කරයි
+        (function () {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark');
+                document.addEventListener('DOMContentLoaded', function () {
+                    const btn = document.getElementById('darkBtn');
+                    if (btn) btn.innerHTML = '☀️ Light Mode';
+                });
+            }
+        })();
+    </script>
+
+</body>
+
+</html>
